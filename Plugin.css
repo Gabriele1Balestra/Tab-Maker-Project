@@ -195,6 +195,109 @@ h2{
   margin-inline-start: 100px;
 }
 
+/*Tab visualization section*/
+
+* {
+  box-sizing:border-box;
+}
+html {
+  font-size:16px;
+}
+
+
+.chordname {
+  font-size:3rem;
+  margin:10px 0 25px;
+  font-weight:bold;
+  text-align:center;
+  position:relative;
+  margin-left:-19px;
+  font-family: sans-serif;
+  color: aliceblue;
+}
+#tabDisplay{
+  position: relative;
+  display: inline-flex;
+  padding-top: 10px;
+  margin-top: 100px;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  background-color: #424344;
+}
+
+.diagram-wrap {
+  float:left;
+  width:330px;
+}
+
+
+.diagram {
+  .row {
+    clear:both;
+    &.first {
+      .fret {
+        border-top:1px solid darkgray;
+      }
+    }
+    &.last {
+      .fret {
+        border:0;
+      }
+    }
+  }
+
+  .cell {
+    float:left;
+    position:relative;
+    width:76px;
+    height:32px;
+    &.fret {
+      border:1px solid darkgray;
+      border-top:0;
+      &:not(:last-of-type) {
+        border-right:0;
+      }
+    }
+    &.label {
+      width:20px;
+      color: aliceblue;
+    }
+
+
+    .note {
+        position:absolute;
+        z-index:2;
+        width:26px;
+        height:26px;
+        left:50%;
+        margin-left:-13px;
+        margin-top:-13px;
+        color:#fff;
+        background:#1f1f1f;
+        text-align:center;
+        border-radius:50%;
+        padding-top:4px;
+
+        &.stringname, &.openstring {
+          background:none;
+          color: aliceblue;
+        }
+        &.stringname {
+          color: aliceblue;
+        }
+        &.openstring {
+          font-weight:bold;
+          color: aliceblue;
+        }
+
+    }
+  }
+
+
+}
+
+
 .dropdown-content a:hover {background-color: #000000c2;}
 
 .show {display:block;}

@@ -4,16 +4,6 @@ toggle between hiding and showing the dropdown content */
 
 
 const cromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-/*const keyboard = [
-["E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C3", "C#3", "D3", "D#3"],
-["B2", "C2", "C#2", "D2", "D#2", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3"],
-["G2", "G#2", "A2", "A#2", "B2", "C2", "C#2", "D2", "D#2", "E3", "F3", "F#3"],
-["D1", "D#1", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C2", "C#2"],
-["A1", "A#1", "B1", "C1", "C#1", "D1", "D#1", "E2", "F2", "F#2", "G2", "G#2"],
-["E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1", "C1", "C#1", "D1", "D#1"]
-]; */
-
-
 
   const keyboard = [
     ["E3", "F3", "F#3", "G3", "G#3"],
@@ -22,13 +12,13 @@ const cromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#
     ["D1", "D#1", "E2", "F2", "F#2"],
     ["A1", "A#1", "B1", "C1", "C#1"],
     ["E1", "F1", "F#1", "G1", "G#1"]
-    ]; 
+    ];
 
 const majRule = [4, 7]; 
 const minRule = [3, 7];
 const dimRule = [3, 6];
 const augRule = [5, 8];
-const rule7   = 13;
+const rule7   = 11;
 const rule9   = 14;
 let chordPieces = ["", "", ""];
 let chord ="";
@@ -133,18 +123,20 @@ function ClearChords(){
 ////////////////////////////////// TAB GENERATION SECTION ////////////////////////////////
 
 
-
-
-
 function GenerateTab(){
-let matches;
-let voicing;
-let output = [];
+  let matches;
+  let output = [];
+  let tabPoints;
+  let tabOutput = [];
+  
+  //Erase all previous tab diagrams
+  document.getElementById("tabDisplay").innerHTML = "";
+
   echo(progressionPieces);
 
   //Loop on the chord sequence
   for(var i = 0; i<progressionPieces.length; i++){
-    voicing = [];
+    let voicing = [];
     let consideredChord = [];
     matches = [];
     //Generating chord using rules and chromatic scale
@@ -166,36 +158,43 @@ let output = [];
         }
       }
     }
-
-
-
-  echo(`Matches: ${JSON.stringify(matches)}`);
-
-    while(voicing.length<consideredChord.length-1){
+    echo(`Matches: ${JSON.stringify(matches)}`);
+    //Loops until all the notes have been matched with a ergonomical tab
+    while(voicing.length<consideredChord.length){
       let left = null;
       let right = null;
       voicing = [];
+      tabPoints = [];
       //For every note
       for(let m=0; m<consideredChord.length; m++){
-        //For every match found for that note
+
+        //For every match found
         for(let n=0; n<matches.length; n++){
+          //If the match contains the considered note
           if(matches[n].note == consideredChord[m]){
+            //If the left variable contains a value and it is 1 string away
             if(left != null && matches[n].string == left -1){
+              //Update left variable with the new value
               left = matches[n].string;
+              //Removes the considered match so that it won't be considered in the following loops(in case this loops doesn't find an ergonomic voicing)
               voicing.push(keyboard[matches[n].string][matches[n].fret]);
+              tabPoints.push({string: matches[n].string, fret: matches[n].fret});
+              //Ends the loop by assigning to n the lenght of the array
               n = matches.length;
-            }else{
+            } else {
               if(right != null && matches[n].string == right +1){
-              right = matches[n].string;
-              voicing.push(keyboard[matches[n].string][matches[n].fret]);
-              n = matches.length;
-              }else{
-                if(left == null && left == null){
-                left = matches[n].string;
                 right = matches[n].string;
                 voicing.push(keyboard[matches[n].string][matches[n].fret]);
-                matches.splice(n, 1);
+                tabPoints.push({string: matches[n].string, fret: matches[n].fret});
                 n = matches.length;
+              } else {
+                if(left == null && left == null){
+                  left = matches[n].string;
+                  right = matches[n].string;
+                  voicing.push(keyboard[matches[n].string][matches[n].fret]);
+                  tabPoints.push({string: matches[n].string, fret: matches[n].fret});
+                  matches.splice(n, 1);
+                  n = matches.length;
                 }
               }
             }
@@ -204,9 +203,88 @@ let output = [];
       }
     }
     echo(`output parziale:${voicing}`);
+    //Saving the voiving in the output variable
     output.push(voicing);
+    tabOutput.push(tabPoints);
   }
   echo(`output: ${JSON.stringify(output)}`);
+  echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
+      
+  
+  //////// Tab visualization section /////////////
+  //For every chord in the output
+  let text = "<div class=\"page\"> ";
+  for(let k=0; k<tabOutput.length; k++){
+    text =  text + "<div class=\"diagram-wrap\"> " +
+            "<div class=\"diagram\"> "             + 
+            "<h3 class=\"chordname\">"             +  
+            progressionPieces[k][0].toString();
+
+            if(progressionPieces[k][1].toString() !="Maj") text = text + progressionPieces[k][1].toString();
+
+            text = text + progressionPieces[k][2].toString() + "</h3>";
+    
+              
+    //For each string  
+    for(let s=0; s<6; s++){
+      let label = false;
+      if(s == 0){
+        text = text + "<div class=\"row first\"> ";
+      } else {
+        if(s == 5){
+          text = text + "<div class=\"row last\"> ";
+        } else {
+          text = text + "<div class=\"row\"> ";
+        }
+      }
+      text = text + "<div class=\"cell label\"><div class=\"note stringname\">" 
+            + keyboard[s][0].toString().slice(0, -1) 
+            + "</div></div> ";
+      //For every single tab point
+      let found = false;
+      for(let g=0; g<tabOutput[k].length; g++){
+        if(tabOutput[k][g].string == s){
+          found = true;
+          //For every column of the output diagram (frets)
+          for(let c=0; c<=3; c++){
+            if(tabOutput[k][g].fret == c){
+              if(c>0){
+                text = text + "<div class=\"cell fret\"><div class=\"blue note\"></div></div> ";
+              } else {
+                if(!label){
+                  text = text + "<div class=\"cell label\"><div class=\"note openstring\">O</div></div> "
+                  label = true;
+                }
+              }
+            } else {
+              if(!label){
+                text = text + "<div class=\"cell label\"></div> ";
+                label = true;
+              }
+              if(c>0){
+                text = text + "<div class=\"cell fret\"></div> ";
+              }
+            }
+          }
+          text = text + "</div> ";
+        }
+      }
+      if(!found){
+        text = text +                 
+        "<div class=\"cell label\"><div class=\"note openstring\">&times;</div></div> " +
+        "<div class=\"cell fret\"></div> " +
+        "<div class=\"cell fret\"></div> " +
+        "<div class=\"cell fret\"></div> " +
+        "</div> ";
+      }
+    }
+    text = text + "</div> </div>";
+    
+  }
+  text = text + "</div> </div>";
+  echo(text)    
+  document.getElementById("tabDisplay").insertAdjacentHTML("beforeend", text)
+  ClearChords();
   return(output);
 }
 
@@ -255,6 +333,8 @@ function GenerateChord(inputChord){
     }
     return(computedChord);
 }
+
+
 
 function echo(toPrint){
   console.log(toPrint);
