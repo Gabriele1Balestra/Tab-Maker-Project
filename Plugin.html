@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="Plugin.css"> <!--collega file html a foglio stile css-->
-    <script src="Plugin.js"></script> <!--collega file html a foglio stile JavaScript-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="Plugin.css" />
+    <!--collega file html a foglio stile css-->
+    <script src="Plugin.js"></script>
+    <!--collega file html a foglio stile JavaScript-->
   </head>
 
   <body>
-    <img src="logo_large.png" alt="Titolo">
+    <img src="logo_large.png" alt="Titolo" />
 
-    <h2>Select a chord progression from the menu bar and click Generate Tab to visualize an ergonomic tablature scheme </h2>
+    <h2>
+      Select a chord progression from the menu bar and click Generate Tab to
+      visualize an ergonomic tablature diagrams.
+    </h2>
     <div id="menuBar">
       <div class="dropdown" onclick="exitFunction(1)">
         <button class="dropbtn">Note</button>
         <div id="myDropdown1" class="dropdown-content">
-          <a onclick="collectNote('C')"   class="note" value="C">C</a>
-          <a onclick="collectNote('C#')"  class="note" value="C#">C#</a>
-          <a onclick="collectNote('D')"   class="note" value="D">D</a>
-          <a onclick="collectNote('D#')"  class="note" value="D#">D#</a>
-          <a onclick="collectNote('E')"   class="note" value="E">E</a>
-          <a onclick="collectNote('F')"   class="note" value="F">F</a>
-          <a onclick="collectNote('F#')"  class="note" value="F#">F#</a>
-          <a onclick="collectNote('G')"   class="note" value="G">G</a>
-          <a onclick="collectNote('G#')"  class="note" value="G#">G#</a>
-          <a onclick="collectNote('A')"   class="note" value="A">A</a>
-          <a onclick="collectNote('A#')"  class="note" value="A#">A#</a>
-          <a onclick="collectNote('B')"   class="note" value="B">B</a>
+          <a onclick="collectNote('C')" class="note" value="C">C</a>
+          <a onclick="collectNote('C#')" class="note" value="C#">C#</a>
+          <a onclick="collectNote('D')" class="note" value="D">D</a>
+          <a onclick="collectNote('D#')" class="note" value="D#">D#</a>
+          <a onclick="collectNote('E')" class="note" value="E">E</a>
+          <a onclick="collectNote('F')" class="note" value="F">F</a>
+          <a onclick="collectNote('F#')" class="note" value="F#">F#</a>
+          <a onclick="collectNote('G')" class="note" value="G">G</a>
+          <a onclick="collectNote('G#')" class="note" value="G#">G#</a>
+          <a onclick="collectNote('A')" class="note" value="A">A</a>
+          <a onclick="collectNote('A#')" class="note" value="A#">A#</a>
+          <a onclick="collectNote('B')" class="note" value="B">B</a>
         </div>
       </div>
       <div class="dropdown" onclick="exitFunction(2)">
@@ -40,31 +45,41 @@
       <div class="dropdown" onclick="exitFunction(3)">
         <button class="dropbtn">Extension</button>
         <div id="myDropdown3" class="dropdown-content">
+          <a onclick="collectNote('4')" class="extension" value="4">4</a>
           <a onclick="collectNote('7')" class="extension" value="7">7</a>
           <a onclick="collectNote('9')" class="extension" value="9">9</a>
-          <a onclick="collectNote('2')" class="extension" value="2">2</a>
         </div>
       </div>
 
-      <div id="chordBox" >
-          <div id = "innerChordBox">
-              <p id="chordValue"> </p>
-          </div>
-          <button class="menubtn" onclick="AddChord()" >Add Chord</button>
+      <div id="chordBox">
+        <div id="innerChordBox">
+          <p id="chordValue"></p>
+        </div>
+        <button class="menubtn" onclick="AddChord()">Add Chord</button>
       </div>
 
-      <div id="chordProgressionBox"> 
-        <p id="chordProgression"> </p>
+      <div id="chordProgressionBox">
+        <p id="chordProgression"></p>
       </div>
       <div id="chordRemovalBox">
         <button class="menubtn" onclick="RemoveChord()">Remove Chord</button>
-        <button class="menubtn" onclick="ClearChords()">Clear All</button>
-        <button class="menubtn" id="generateBtn"onclick="GenerateTab()">Generate Tab</button>
+        <button class="menubtn" onclick="ClearChords(diagr=true)">Clear All</button>
+        <button class="menubtn" id="generateBtn" onclick="GenerateTab()">
+          Generate Tab
+        </button>
       </div>
     </div>
     <!--Visualizzazione tab generate-->
-   <div id="tabDisplay"></div>
+    <div id="tabDisplay"></div>
+
+    <div class="toggleContainer" id="toggleContainer">
+      <div class="container" id="container">
+        <button class="button">
+          <span class="arrow"></span>
+          <label for="toggle" class="label">Play</label>
+          <input type="checkbox" id="toggle" class="visually-hidden" />
+        </button>
+      </div>
+    </div>
   </body>
-  
- 
 </html>
