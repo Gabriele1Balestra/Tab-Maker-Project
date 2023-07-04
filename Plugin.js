@@ -157,9 +157,8 @@ function ClearChords(diagr) {
   if(document.getElementById("toggleContainer").classList.contains("show")){
     document.getElementById("toggleContainer").classList.remove("show");
   }
-  if(document.getElementById("chordBox").classList.contains("showFlex")){
-    document.getElementById("chordBox").classList.remove("showFlex");
-  }
+  var box = document.getElementById("chordBox");
+  box.style.display = "none";
 }
 
 ////////////////////////////////// TAB GENERATION SECTION ////////////////////////////////
