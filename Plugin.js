@@ -2,7 +2,8 @@
 // Parameters list:
 
 const cromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", 
-"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", 
+"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const keyboard = [
   ["E3", "F3", "F#3", "G3", "G#3"],
@@ -139,7 +140,7 @@ function RemoveChord() {
         chordProgression = chordProgression.toString() + " - ";
       }
     }
-    //echo(progressionPieces);
+    echo(progressionPieces);
     document.getElementById("chordProgression").innerHTML = chordProgression;
 
   }
@@ -181,18 +182,18 @@ function GenerateTab() {
     matches = [];
     //Generating chord using rules and chromatic scale
     consideredChord = GenerateChord((inputChord = progressionPieces[i]));
-    //echo(`Considered Chord: ${consideredChord}`);
+    echo(`Considered Chord: ${consideredChord}`);
 
     //For every note of the considered chord
     for (var h = 0; h < consideredChord.length; h++) {
-      //echo(`Nota considerata: ${consideredChord[h]}`);
+      echo(`Nota considerata: ${consideredChord[h]}`);
 
       //For every string of the guitar collects all the matches
       for (var k = 0; k < keyboard.length; k++) {
-        //echo(`String considerata: ${keyboard[k]}`);
+        echo(`String considerata: ${keyboard[k]}`);
         if (keyboard[k].some((e) => e.includes(consideredChord[h]))) {
-          //echo("Match: ");
-          //echo(keyboard[k].findIndex(element => element.includes(consideredChord[h].toString())));
+          echo("Match: ");
+          echo(keyboard[k].findIndex(element => element.includes(consideredChord[h].toString())));
           matches.push({
             note: consideredChord[h],
             string: k,
@@ -203,7 +204,7 @@ function GenerateTab() {
         }
       }
     }
-    //echo(`Matches: ${JSON.stringify(matches)}`);
+    echo(`Matches: ${JSON.stringify(matches)}`);
     //Loops until all the notes have been matched with a ergonomical tab
     while (voicing.length < consideredChord.length) {
       let left = null;
@@ -255,13 +256,13 @@ function GenerateTab() {
         }
       }
     }
-    //echo(`output parziale:${voicing}`);
+    echo(`output parziale:${voicing}`);
     //Saving the voiving in the output variable
     output.push(voicing);
     tabOutput.push(tabPoints);
   }
-  //echo(`output: ${JSON.stringify(output)}`);
-  //echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
+  echo(`output: ${JSON.stringify(output)}`);
+  echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
 
   //////// Tab visualization section /////////////
   //For every chord in the output
@@ -279,7 +280,7 @@ function GenerateTab() {
 
     text = text + progressionPieces[k][2].toString() + "</h3>";
 
-    //For each string
+    //For every string
     for (let s = 0; s < 6; s++) {
       let label = false;
       if (s == 0) {
@@ -343,7 +344,7 @@ function GenerateTab() {
     text = text + "</div> </div>";
   }
   text = text + "</div> </div>";
-  //echo(text);
+  echo(text);
   document.getElementById("tabDisplay").insertAdjacentHTML("beforeend", text);
   //Shows display button
   document.getElementById("toggleContainer").classList.add("show");
