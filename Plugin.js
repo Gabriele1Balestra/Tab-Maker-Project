@@ -2,8 +2,7 @@
 // Parameters list:
 
 const cromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", 
-"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", 
-"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const keyboard = [
   ["E3", "F3", "F#3", "G3", "G#3"],
@@ -169,7 +168,8 @@ function GenerateTab() {
   let output = [];
   let tabPoints;
   let tabOutput = [];
-
+  let accordi=[];
+  let daje= [];
   //Erase all previous tab diagrams
   document.getElementById("tabDisplay").innerHTML = "";
 
@@ -260,10 +260,22 @@ function GenerateTab() {
     //Saving the voiving in the output variable
     output.push(voicing);
     tabOutput.push(tabPoints);
-  }
-  echo(`output: ${JSON.stringify(output)}`);
-  echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
 
+
+    accordi.push(output);
+    
+  }
+  
+ let daje_2;
+  
+  
+  echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
+  echo(`diosborra output: ${JSON.stringify(accordi)}`);
+  echo(`diosborroso output: ${JSON.stringify(accordi[0])}`);
+  accordi=JSON.stringify(accordi);
+  console.log(accordi);
+  
+  
   //////// Tab visualization section /////////////
   //For every chord in the output
   let text = '<div class="page"> ';
@@ -280,7 +292,7 @@ function GenerateTab() {
 
     text = text + progressionPieces[k][2].toString() + "</h3>";
 
-    //For every string
+    //For each string
     for (let s = 0; s < 6; s++) {
       let label = false;
       if (s == 0) {
@@ -348,7 +360,10 @@ function GenerateTab() {
   document.getElementById("tabDisplay").insertAdjacentHTML("beforeend", text);
   //Shows display button
   document.getElementById("toggleContainer").classList.add("show");
+  
+  console.log(output,"gaetano_uno_di_noi")
   return output;
+ 
 }
 
 function shuffleArray(array) {
@@ -405,3 +420,12 @@ function GenerateChord(inputChord) {
 function echo(toPrint) {
   console.log(toPrint);
 }
+
+
+
+
+
+
+/////////filippo
+
+
