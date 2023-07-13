@@ -389,6 +389,7 @@ html {
 	justify-content: center;
 	align-items: center;
 	padding: 0 0 2rem 0;
+  flex-direction: column;
 }
 
 .button {
@@ -432,47 +433,48 @@ html {
 	border-left: 1rem solid aliceblue;
 }
 
-.arrow::after {
-	transition: transform 0.4s ease-in-out;
-	content: "";
-	position: absolute;
-	background-color: transparent;
-	width: 1.5rem;
-	height: 2rem;
-	top: -1rem;
-}
-
-.arrow::before {
-	transition: all 0.3s ease-out;
-	content: "";
-	position: absolute;
-	background-color: transparent;
-	width: 1rem;
-	height: 1.6rem;
-	top: -0.8rem;
-}
-
-.label {
-	cursor: pointer;
-}
-
 .visually-hidden {
 	cursor: pointer;
 	position: absolute;
 	opacity: 0;
 }
 
-.button:has(input:checked) > .arrow::before {
-	transform: translateX(-1rem);
-	background:aliceblue;
-	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 1) 30%,
-		rgba(46, 119, 242, 1) 30%,
-		rgba(46, 119, 242, 1) 70%,
-		rgba(255, 255, 255, 1) 70%
-	);
+#bottomMenu{
+  display: flex;
+  background-color: #2f3031;
+  margin-top: 30px;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  padding-inline-start: 5000px;
+  padding-inline-end: 5000px;
+  font-family: Arial, Helvetica, sans-serif;
 }
+.check{
+  width: fit-content;
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font:inherit;
+  cursor: pointer;
+}
+input{
+  cursor: pointer;
+  font:inherit;
+}
+
+#bottmoText{
+  width: 350px;
+}
+
 
 @keyframes back {
 	0% {
@@ -493,6 +495,7 @@ html {
 		transform: translateX(0rem);
 	}
 }
+
 .move {
 	animation-name: slide;
 	animation-duration: 0.3s;
@@ -504,23 +507,14 @@ html {
 
 .show {
   display: block;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  color: aliceblue;
+	align-items: center;
+	font-size: 1.2rem;
+  flex-direction: column;
 }
 
-
-
-
-
-
-
-
-p,
-label {
-    font: 1rem 'Fira Sans', sans-serif;
-    
-}
-
-input {
-    margin: 0.4rem;
-}
 
 
