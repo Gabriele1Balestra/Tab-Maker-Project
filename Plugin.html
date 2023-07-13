@@ -3,9 +3,24 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="Plugin.css" />
+      
+  
+  <script src="https://cdn.jsdelivr.net/npm/tonal/browser/tonal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+  
+  <!-- sound libraries --> 
+  <script src="https://cdn.jsdelivr.net/npm/@tonaljs/tonal/browser/tonal.min.js"></script>
+  <script src="https://unpkg.com/tone@14.7.58/build/Tone.js"></script>
+
+  
+  <script src="sketch.js"></script>
     <!--collega file html a foglio stile css-->
     <script src="Plugin.js"></script>
     <!--collega file html a foglio stile JavaScript-->
+  
+
+
   </head>
 
   <body>
@@ -15,6 +30,31 @@
       Select a chord progression from the menu bar and click Generate Tab to
       visualize an ergonomic tablature diagrams.
     </h2>
+   
+
+
+    <div>
+      <b>Select the effects you want to have:</b>
+    </div>
+    <div>
+      <label><input type='checkbox' id="reverb"  name="color"/>    reverb </label>
+      <label><input type='checkbox' id="distortion"  name="color"/>    distortion</label>
+      <label><input type='checkbox' id="vibrato"  name="color"/>    vibrato</label>
+      <label><input type='checkbox' id="phaser"  name="color"/>    phaser</label>
+      <label><input type='checkbox' id="widener"  name="color"/>    widener</label>
+
+
+
+      <label><input type='checkbox' id="delay"  name="color"/>    delay</label>
+
+      <label><input type='checkbox' id="tremolo"  name="color"/>    tremolo </label>
+  </div>
+  
+  <div>
+    <b>Check this box to select arpeggio style:</b>
+    <label><input type='checkbox' name="ciao" id="arpeggio"  />    arpeggio </label>
+  </div>
+ 
     <div id="menuBar">
       <div class="dropdown" onclick="exitFunction(1)">
         <button class="dropbtn">Note</button>
@@ -64,7 +104,7 @@
       <div id="chordRemovalBox">
         <button class="menubtn" onclick="RemoveChord()">Remove Chord</button>
         <button class="menubtn" onclick="ClearChords(diagr=true)">Clear All</button>
-        <button class="menubtn" id="generateBtn" onclick="GenerateTab()">
+        <button class="menubtn" id="generateBtn" onclick="fai_cose()">
           Generate Tab
         </button>
       </div>
@@ -74,7 +114,7 @@
 
     <div class="toggleContainer" id="toggleContainer">
       <div class="container" id="container">
-        <button class="button">
+        <button class="button" onclick="fai_play()">
           <span class="arrow"></span>
           <label for="toggle" class="label">Play</label>
           <input type="checkbox" id="toggle" class="visually-hidden" />
@@ -84,3 +124,12 @@
     </div>
   </body>
 </html>
+
+
+
+
+
+
+
+ 
+
