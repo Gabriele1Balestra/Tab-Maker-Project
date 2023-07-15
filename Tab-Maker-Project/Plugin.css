@@ -1,0 +1,520 @@
+/* CSS Reset snippet*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-width: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+body {
+  line-height: 1;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*//////////////////////////////////////*/
+
+
+
+
+
+body {
+  line-height: 1;
+  background-image: url("back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+}
+
+img[src="logo_large.png"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  object-fit: contain;
+}
+
+h2 {
+  color: white;
+  background-color: #2f3031;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#menuBar {
+  display: flex;
+  /*justify-content: space-between;*/
+  align-items: center;
+  background: #2f3031;
+  margin-top: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  background-color: #2f3031;
+  display: inline-block;
+  z-index: 4;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #2f3031;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #000000c2;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2f3031;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  background-color: #2f3031;
+  color: white;
+  text-decoration: none;
+  padding: 12px 30px;
+  display: block;
+}
+
+#chordBox {
+  display: none;
+  background-color: #2f3031;
+  position: relative;
+  font-size: 16px;
+  text-align: center;
+  margin-inline-start: 10px;
+  color: white;
+  align-content: center;
+  align-items: center;
+}
+
+#innerChordBox {
+  background-color: #424344;
+  width: fit-content;
+  min-width: 60px;
+  min-height: 40px;
+  padding-inline-end: 10px;
+  padding-inline-start: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-content: center;
+  align-items: center;
+}
+
+#chordValue {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-inline-start: 10px;
+  margin-inline-end: 10px;
+}
+
+.menubtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-inline-start: 10px;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-color: rgb(59, 59, 59);
+}
+
+#chordProgressionBox {
+  position: relative;
+  display: inline-flex;
+  min-width: 250px;
+  width: fit-content;
+  min-height: 40px;
+  margin-inline-start: 100px;
+  padding-inline: 10px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  background-color: #424344;
+}
+#generateBtn {
+  background-color: darkgreen;
+  margin-inline-start: 100px;
+}
+
+/*Tab visualization section*/
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+}
+
+.chordname {
+  font-size: 3rem;
+  margin: 10px 0 25px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  font-family: sans-serif;
+  color: aliceblue;
+}
+
+#tabDisplay {
+  position: relative;
+  margin-top: 100px;
+  color: aliceblue;
+  font-size: 16px;
+  background-color: #2f3031;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+}
+.diagram-wrap {
+  float: left;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.diagram .row {
+  clear: both;
+}
+.diagram .row.first .fret {
+  border-top: 1px solid darkgray;
+}
+.diagram .row.last .fret {
+  border: 0px;
+}
+.diagram .cell {
+  float: left;
+  position: relative;
+  width: 76px;
+  height: 32px;
+}
+.diagram .cell.fret {
+  border-width: 0px 1px 1px;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-color: darkgray;
+  border-bottom-color: darkgray;
+  border-left-color: darkgray;
+  border-image: initial;
+  border-top-style: initial;
+  border-top-color: initial;
+}
+.diagram .cell.fret:not(:last-of-type) {
+  border-right: 0px;
+}
+.diagram .cell.label {
+  width: 20px;
+  color: aliceblue;
+}
+.diagram .cell .note {
+  position: absolute;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  left: 50%;
+  margin-left: -13px;
+  margin-top: -13px;
+  color: aliceblue;
+  background: #050505;
+  text-align: center;
+  border-radius: 50%;
+  padding-top: 4px;
+}
+.diagram .cell .note.stringname, .diagram .cell .note.openstring {
+  background: none;
+  color: aliceblue;
+}
+.diagram .cell .note.stringname {
+  color: aliceblue;
+}
+.diagram .cell .note.openstring {
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.dropdown-content a:hover {
+  background-color: #000000c2;
+}
+
+
+
+.toggleContainer{
+  display: none;
+}
+
+.container {
+	font-family: "Poppins", sans-serif;
+	min-width: 100vw;
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 0 2rem 0;
+  flex-direction: column;
+}
+
+.button {
+	position: relative;
+	font-family: inherit;
+	transition: all 0.1s ease-in;
+	display: flex;
+	gap: 1.65rem;
+	cursor: pointer;
+	border-radius: 3rem;
+	padding: 1.2rem 3rem;
+	background-color: #2f3031;
+	color: aliceblue;
+	align-items: center;
+	font-size: 1.8rem;
+	font-weight: 600;
+	min-width: 15rem;
+	justify-content: center;
+}
+
+.button:hover {
+	background-color: darkgreen;
+}
+
+.button:has(input:checked) {
+	background-color: darkgreen;
+}
+
+.button:active {
+	transform: translateY(0.2rem);
+}
+
+.arrow {
+	position: relative;
+	transition: all 0.4s ease-in-out;
+	cursor: pointer;
+	width: 0;
+	height: 0;
+	border-top: 0.8rem solid transparent;
+	border-bottom: 0.8rem solid transparent;
+	border-left: 1rem solid aliceblue;
+}
+
+.visually-hidden {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
+}
+
+#bottomMenu{
+  display: flex;
+  background-color: #2f3031;
+  margin-top: 30px;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  padding-inline-start: 5000px;
+  padding-inline-end: 5000px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.check{
+  width: fit-content;
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font:inherit;
+  cursor: pointer;
+}
+input{
+  cursor: pointer;
+  font:inherit;
+}
+
+#bottmoText{
+  width: 350px;
+}
+
+
+@keyframes back {
+	0% {
+		transform: translateX(0rem);
+	}
+	20% {
+		transform: translateX(-0.8rem);
+	}
+	100% {
+		transform: translateX(0rem);
+	}
+}
+@keyframes slide {
+	0% {
+		transform: translateX(-1rem);
+	}
+	to {
+		transform: translateX(0rem);
+	}
+}
+
+.move {
+	animation-name: slide;
+	animation-duration: 0.3s;
+}
+.back {
+	animation-name: back;
+	animation-duration: 0.4s;
+}
+
+.show {
+  display: block;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  color: aliceblue;
+	align-items: center;
+	font-size: 1.2rem;
+  flex-direction: column;
+}
+
+
+
