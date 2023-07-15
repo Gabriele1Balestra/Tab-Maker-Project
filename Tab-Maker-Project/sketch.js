@@ -128,7 +128,8 @@ function timeRefresh(time) {
 var changeChord;
 let currentChord;
 currentChord=0;
-let duration = 0.8 + "m";
+let duration_chords = 0.8 + "m";
+let duration_arpeggio = 0.5 + "m";
 function play() {
    chords = [];
     Arpeggio = [];
@@ -149,14 +150,14 @@ function play() {
   if (document.getElementById("Arpeggio").checked) {
     changeChord = function (time) {
       if (currentChord >= Arpeggio.length) {
-        Tone.Transport.stop();
+        Tone.Transport.cancel();
         
         return;
       }
       
-      let duration = 0.2 + "m";
-      Tone.Transport.schedule(changeChord, "+" + duration);
-      poly.triggerAttackRelease(Arpeggio[currentChord], duration, time);
+      
+      Tone.Transport.schedule(changeChord, "+" + duration_arpeggio);
+      poly.triggerAttackRelease(Arpeggio[currentChord], duration_arpeggio, time);
       
       
     
@@ -174,11 +175,11 @@ function play() {
       }
 
       
-      Tone.Transport.schedule(changeChord, "+" + duration);
+      Tone.Transport.schedule(changeChord, "+" + duration_chords);
       echo("jalluca")
       echo(currentChord)
       
-      poly.triggerAttackRelease(chords[currentChord], duration, time);
+      poly.triggerAttackRelease(chords[currentChord], duration_chords, time);
      currentChord++;
       
   
