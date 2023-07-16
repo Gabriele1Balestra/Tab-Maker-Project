@@ -38,8 +38,7 @@ function genera_suoni() {
     }
     chords.push(chord_1);
   }
-  echo("dio maiale")
-  echo(chords)
+  //echo(chords)
 }
 
 function launch_GenerateTab() {
@@ -116,8 +115,7 @@ function initializeAudio() {
   Tone.Transport.stop();
   
   Tone.Transport.start();
-  echo("dajee")
-  echo(chords[currentChord])
+  //echo(chords[currentChord])
 }
 function timeRefresh(time) {
   setTimeout("location.reload();", time);
@@ -136,15 +134,13 @@ function play() {
     currentChord=0;   
   
   
-  echo("Arpeggio")
-  echo(Arpeggio)
-  echo("Output")
-  echo(output)
-  echo("chords")
-  echo(chords)
-  
-  echo("maddona lurida")
-   
+  //echo("Arpeggio")
+  //echo(Arpeggio)
+  //echo("Output")
+  //echo(output)
+  //echo("chords")
+  //echo(chords)
+
   genera_suoni(); 
 
   if (document.getElementById("Arpeggio").checked) {
@@ -163,7 +159,7 @@ function play() {
     
       currentChord++;
       
-  echo(output)
+  //echo(output)
     };
   } else {
     
@@ -176,8 +172,8 @@ function play() {
 
       
       Tone.Transport.schedule(changeChord, "+" + duration_chords);
-      echo("jalluca")
-      echo(currentChord)
+
+      //echo(currentChord)
       
       poly.triggerAttackRelease(chords[currentChord], duration_chords, time);
      currentChord++;
@@ -185,8 +181,8 @@ function play() {
   
   
       
-      echo("accordi suonati")
-      echo(chords[currentChord])
+      //echo("accordi suonati")
+      //echo(chords[currentChord])
     
     };
   }

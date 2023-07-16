@@ -2,7 +2,8 @@
 // Parameters list:
 
 const cromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", 
-"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+"A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", 
+"A#", "B", ];
 
 const keyboard = [
   ["E3", "F3", "F#3", "G3", "G#3"],
@@ -169,7 +170,7 @@ function GenerateTab() {
   let tabPoints;
   let tabOutput = [];
   let accordi=[];
-  let daje= [];
+  
   //Erase all previous tab diagrams
   document.getElementById("tabDisplay").innerHTML = "";
 
@@ -206,16 +207,30 @@ function GenerateTab() {
     }
     //echo(`Matches: ${JSON.stringify(matches)}`);
     //Loops until all the notes have been matched with a ergonomical tab
-    while (voicing.length < consideredChord.length) {
+    let trials = 0;
+    let loopShuffleRestart = 0;    
+    //echo(`consideredChord: ${JSON.stringify(consideredChord)}`);
+      //echo(`voicing: ${JSON.stringify(voicing)}`);
+      //echo(`matches: ${JSON.stringify(matches)}`);
+      //echo(`consideredChord: ${JSON.stringify(consideredChord)}`);
+    while (voicing.length < consideredChord.length && trials<20) {
       let left = null;
       let right = null;
       voicing = [];
       tabPoints = [];
+      trials++;
+      loopShuffleRestart++;
+
+      //echo(`trials counter: ${JSON.stringify(trials)}`);
+
       //For every note
       for (let m = 0; m < consideredChord.length; m++) {
+        
         //For every match found
         for (let n = 0; n < matches.length; n++) {
           //If the match contains the considered note
+          //echo(`matches[n].note: ${JSON.stringify(matches[n].note)}`);
+          //echo(`consideredChord[m]: ${JSON.stringify(consideredChord[m])}`);
           if (matches[n].note == consideredChord[m]) {
             //If the left variable contains a value and it is 1 string away
             if (left != null && matches[n].string == left - 1) {
@@ -227,27 +242,28 @@ function GenerateTab() {
                 string: matches[n].string,
                 fret: matches[n].fret,
               });
-              //Ends the loop by assigning to n the lenght of the array
+              //Ends the for loop by assigning to n the lenght of the array
               n = matches.length;
-            } else {
+            } else {//If the right variable contains a value and it is 1 string away
               if (right != null && matches[n].string == right + 1) {
                 right = matches[n].string;
                 voicing.push(keyboard[matches[n].string][matches[n].fret]);
+                //echo(`voicing updated: ${JSON.stringify(voicing)}`);
                 tabPoints.push({
                   string: matches[n].string,
                   fret: matches[n].fret,
                 });
                 n = matches.length;
-              } else {
+              } else {//If neither variable contains a value this means that this is the first note of the voicing to be placed.
                 if (left == null && left == null) {
                   left = matches[n].string;
                   right = matches[n].string;
                   voicing.push(keyboard[matches[n].string][matches[n].fret]);
+                  //echo(`voicing updated: ${JSON.stringify(voicing)}`);
                   tabPoints.push({
                     string: matches[n].string,
                     fret: matches[n].fret,
                   });
-                  matches.splice(n, 1);
                   n = matches.length;
                 }
               }
@@ -255,20 +271,19 @@ function GenerateTab() {
           }
         }
       }
+        //echo('Shuffle');
+        consideredChord = shuffle(consideredChord);
+        //echo(`matches updated: ${JSON.stringify(matches)}`);
     }
     //echo(`output parziale:${voicing}`);
-    //Saving the voiving in the output variable
+    //Saving the voicing in the output variable
     output.push(voicing);
     tabOutput.push(tabPoints);
-
-
     accordi.push(output);
     
   }
 
   //echo(`tabOutput: ${JSON.stringify(tabOutput)}`);
-  //echo(`diosborra output: ${JSON.stringify(accordi)}`);
-  //echo(`diosborroso output: ${JSON.stringify(accordi[0])}`);
   accordi=JSON.stringify(accordi);
   console.log(accordi);
   
@@ -407,11 +422,20 @@ function echo(toPrint) {
   console.log(toPrint);
 }
 
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
 
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
 
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
 
-
-/////////filippo
-
-
+  return array;
+}
