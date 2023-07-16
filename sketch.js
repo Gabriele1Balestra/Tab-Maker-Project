@@ -1,5 +1,6 @@
 let output;
-let chords;
+let ga=true;
+let chords=[];
 let poly;
 let settings = {
   volume: -1,
@@ -21,8 +22,7 @@ let settings = {
 let Arpeggio = [];
 
 function genera_suoni() {
-  Arpeggio = [];
-  chords = [];
+  
   for (let i = 0; i < output.length; i++) {
     let accordo = output[i];
     let chord_1 = [];
@@ -38,6 +38,7 @@ function genera_suoni() {
     }
     chords.push(chord_1);
   }
+  //echo(chords)
 }
 
 function launch_GenerateTab() {
@@ -46,6 +47,7 @@ function launch_GenerateTab() {
 
 //-------------------------------------------------------
 function initializeAudio() {
+
   Tone.Master.volume.value = settings.volume;
 
   poly = new Tone.PolySynth(Tone.AMSynth, {
@@ -107,48 +109,88 @@ function initializeAudio() {
     poly.connect(Widener);
     Widener.connect(gain);
   }
+ 
 
-  Tone.Transport.schedule(changeChord, "1");
+  Tone.Transport.schedule(changeChord,0.5 + "m");
+  Tone.Transport.stop();
+  
   Tone.Transport.start();
+  //echo(chords[currentChord])
+}
+function timeRefresh(time) {
+  setTimeout("location.reload();", time);
 }
 
 //-------------------------------------------------------
-var changeChord;
 
+var changeChord;
+let currentChord;
+currentChord=0;
+let duration_chords = 0.8 + "m";
+let duration_arpeggio = 0.5 + "m";
 function play() {
-  chords = [];
-  Arpeggio = [];
-  echo("Arpeggio")
-  echo(Arpeggio)
-  echo("Output")
-  echo(output)
-  echo("chords")
-  echo(chords)
-  let currentChord = 0;
- 
+   chords = [];
+    Arpeggio = [];
+    currentChord=0;   
+  
+  
+  //echo("Arpeggio")
+  //echo(Arpeggio)
+  //echo("Output")
+  //echo(output)
+  //echo("chords")
+  //echo(chords)
+
+  genera_suoni(); 
+
   if (document.getElementById("Arpeggio").checked) {
     changeChord = function (time) {
       if (currentChord >= Arpeggio.length) {
-        Tone.Transport.state == "paused";
+        Tone.Transport.cancel();
+        
         return;
       }
-      let duration = 0.4 + "m";
-      poly.triggerAttackRelease(Arpeggio[currentChord], duration, time);
+      
+      
+      Tone.Transport.schedule(changeChord, "+" + duration_arpeggio);
+      poly.triggerAttackRelease(Arpeggio[currentChord], duration_arpeggio, time);
+      
+      
+    
       currentChord++;
-      Tone.Transport.schedule(changeChord, "+" + duration);
+      
+  //echo(output)
     };
   } else {
+    
     changeChord = function (time) {
       if (currentChord >= chords.length) {
-        Tone.Transport.state == "paused";
+        Tone.Transport.cancel();
+      
         return;
       }
-      let duration = 1 + "m";
-      poly.triggerAttackRelease(chords[currentChord], duration, time);
-      currentChord++;
-      Tone.Transport.schedule(changeChord, "+" + duration);
+
+      
+      Tone.Transport.schedule(changeChord, "+" + duration_chords);
+
+      //echo(currentChord)
+      
+      poly.triggerAttackRelease(chords[currentChord], duration_chords, time);
+     currentChord++;
+      
+  
+  
+      
+      //echo("accordi suonati")
+      //echo(chords[currentChord])
+    
     };
   }
-  genera_suoni();
-  initializeAudio();
+
+   initializeAudio();
+
+   //setInterval(timeRefresh,5000)
+ // poly.triggerAttackRelease("C4", "8n");
+
+
 }
