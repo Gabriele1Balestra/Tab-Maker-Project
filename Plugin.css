@@ -475,27 +475,6 @@ input{
   width: 350px;
 }
 
-
-@keyframes back {
-	0% {
-		transform: translateX(0rem);
-	}
-	20% {
-		transform: translateX(-0.8rem);
-	}
-	100% {
-		transform: translateX(0rem);
-	}
-}
-@keyframes slide {
-	0% {
-		transform: translateX(-1rem);
-	}
-	to {
-		transform: translateX(0rem);
-	}
-}
-
 .move {
 	animation-name: slide;
 	animation-duration: 0.3s;
